@@ -1,0 +1,4 @@
+function f=did_i_hit2(data,cyl_radius,cyl_h)
+theta_min=atan((data(:,1)-cyl_radius)./cyl_h);
+phi_max=asin(cyl_radius./(data(:,1)));
+f=or(data(:,1)<=cyl_radius,and(abs(data(:,3))>=theta_min,abs(data(:,2))<=phi_max));
