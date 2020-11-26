@@ -1,0 +1,21 @@
+range=100;
+v=my_exp_dist(data,range); %data is normilaized and without bg.
+y=v(:,3);
+dy=v(:,4);
+dx=v(:,2);
+x=v(:,1);
+x_bg=x(180:end); % background x vector. the number 180 depends on the range.
+y_bg=y(180:end); % background y vector. the number 180 depends on the range.
+norm_bg(:,1)=v(180:end,1);
+norm_bg(:,2)=v(180:end,2);
+norm_bg(:,3)=y(180:end);
+norm_bg(:,4)=dy(180:end); %last 4 rows created a matrix with normalized background data
+%%errorbar(v(:,1),y,dy,dy,v(:,2),v(:,2));
+%%hold on
+y_fun_bg=1.192e-05.*exp(-0.000294.*x)+1.337e-06.*exp(-0.0001137.*x); % function for the background, used curve fitting tool.
+errorbar(x(28:94),y(28:94)+y_fun_bg(28:94),dy(28:94),dy(28:94),dx(28:94),dx(28:94)); %plots the data plus background
+hold on
+%errorbar(x(28:94),y(28:94),dy(28:94),dy(28:94),dx(28:94),dx(28:94));
+plot(x(28:94),y_fun_bg(28:94));
+y_exp=my_exp(v(:,1),2.090324192348957e+03);
+plot(v(28:94,1),y_exp(28:94)+y_fun_bg(28:94)); %plots the expected graph
