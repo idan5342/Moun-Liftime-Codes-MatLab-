@@ -1,0 +1,13 @@
+function f=results_change_r()
+vec=zeros(2,10);
+for r=100:100:1001
+    temp_vec=zeros(1,100);
+    for j=1:100
+        area=eff_area2(1000000,0,r,10000,10000,10000,12.5);
+        temp_vec(j)=area;
+    end
+    h=my_stdev(temp_vec);
+    vec(1,int16(r/100))=h(1);
+    vec(2,int16(r/100))=h(2);
+end
+f=vec;
