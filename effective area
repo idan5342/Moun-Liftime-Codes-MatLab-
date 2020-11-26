@@ -1,0 +1,7 @@
+function f=eff_area2(sample_size,r_start,r_end,n_r,n_theta,n_phi,z)
+data=my_disk (sample_size,r_start,r_end,n_r,n_theta,n_phi,z);
+flag_vec=did_i_hit2(data,7.5,12.5);
+hits=sum(flag_vec);
+prob=hits./sample_size;
+big_area=pi().*(r_end-r_start).^2;
+f=big_area.*prob;
