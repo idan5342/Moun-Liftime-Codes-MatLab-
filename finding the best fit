@@ -1,0 +1,22 @@
+function [f,g]=calculate_chi(data) %gives back a matrix with chi^2 values.
+s=size(data);
+n=s(1);
+mat_chi=zeros(n);
+mat_tau=zeros(n);
+for n1=1:n-10
+    for n2=n1+11:n
+        x_temp=data(n1:n2,1);
+        dx_temp=data(n1:n2,2);
+        y_temp=data(n1:n2,3);
+        dy_temp=data(n1:n2,4);
+        fit_exp=createFit1(x_temp,y_temp,dy_temp);
+        tau_inv=fit_exp.a;
+        tau=1/tau_inv;
+        y_fun=tau_inv.*exp(-tau_inv.*x_temp);
+        chi_temp=my_chi2(y_temp,dy_temp,y_fun);
+        mat_chi(n1,n2)=chi_temp;
+        mat_tau(n1,n2)=tau;
+    end
+end
+f=mat_chi;
+g=mat_tau;
