@@ -1,0 +1,14 @@
+function f=results_change_sample(r)
+vec=zeros(2,6);
+for n=3:8
+    sample_size=10.^n;
+    temp_vec=zeros(1,100);
+    for j=1:100
+        area=eff_area2(sample_size,0,r,10000,10000,10000,12.5);
+        temp_vec(j)=area;
+    end
+    h=my_stdev(temp_vec);
+    vec(1,n-2)=h(1);
+    vec(2,n-2)=h(2);
+end
+f=vec;
