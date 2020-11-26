@@ -1,0 +1,25 @@
+function f=my_exp_dist(data,range) %gives back a matrix with: x,dx,y,dy as the columns
+bins=0:range:max(data(:,1));
+shift_bins=circshift(bins,-1);
+main_vec=(bins+shift_bins)./2;
+main_vec(end)=[];
+size_main=size(main_vec);
+n=size_main(2);
+v_sums=zeros(n,1);
+for i=1:n
+    counting_vec=and(data(:,1)>=main_vec(i)-range/2,data(:,1)<main_vec(i)+range/2);
+    sum_count=sum(counting_vec);
+    v_sums(i)=sum_count;
+end
+v_final(:,1)=main_vec;
+v_final(:,2)=1/sqrt(6);
+v_final(:,3)=v_sums;
+v_final(:,4)=sqrt(v_sums);
+x=v_final(:,1);
+normal(:,1)=v_final(:,1); %x
+normal(:,2)=v_final(:,2); %dx
+normalizaion_factor=trapz(v_final(:,1),v_final(:,3)/550808);
+normal(:,3)=v_final(:,3)./(normalizaion_factor*550808); %y
+normal(:,4)=v_final(:,4)./(normalizaion_factor*550808); %dy
+y_fun_bg=1.192e-05.*exp(-0.000294.*x)+1.337e-06.*exp(-0.0001137.*x); % function for the background, used curve fitting tool.
+normal(:,3)=normal(:,3)-y_fun_bg;
