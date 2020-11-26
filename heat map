@@ -1,0 +1,5 @@
+[mat_chi,mat_tau]=calculate_chi(my_exp_dist(data,100));
+mat_chi_diff=abs(1-mat_chi);
+mat_log=log(mat_chi_diff);
+mat_log_red=mat_log(1:214,11:225);
+imagesc(x(1:214),x(11:225),mat_log_red);
