@@ -1,0 +1,9 @@
+function f=my_chi2(y_temp,dy_temp,y_fun)
+s=size(y_temp);
+n=s(1);
+chi2=0;
+for i=1:n
+    temp_value=((y_temp(i)-y_fun(i)).^2)./(dy_temp(i)).^2;
+    chi2=chi2+temp_value;
+end
+f=chi2/n;
