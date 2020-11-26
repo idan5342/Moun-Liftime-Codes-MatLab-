@@ -1,0 +1,5 @@
+function f=my_stdev(vec)
+size_vec=size(vec);
+error=std(vec)/sqrt(size_vec(2));
+value=sum(vec)./size_vec(2);
+f=[error,value];
